@@ -1,0 +1,11 @@
+auto_dem (folder, needs to be created manually)
+|
+|--graph (folder, needs to be created manually)
+|   |--XML files
+|--data (folder, needs to be created manually)
+|   |--SLC data
+|--snaphu-v1.4.2_win64
+|   |--snaphu files
+|--interferogram_out (gets generated, no need to create manually)
+|--snaphu_export_out (gets generated, no need to create manually)
+|--auto_dem.bat
