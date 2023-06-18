@@ -1,0 +1,90 @@
+<graph id="Graph">
+  <version>1.0</version>
+  <node id="Read">
+    <operator>Read</operator>
+    <sources/>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <useAdvancedOptions>false</useAdvancedOptions>
+      <file>D:\auto_dem\interferogram_out\srp_ifgs.dim</file>
+      <copyMetadata>true</copyMetadata>
+      <bandNames/>
+      <pixelRegion>0,0,4999,4999</pixelRegion>
+      <maskNames/>
+    </parameters>
+  </node>
+  <node id="SnaphuImport">
+    <operator>SnaphuImport</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+      <sourceProduct.1 refid="Read(2)"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <doNotKeepWrapped>false</doNotKeepWrapped>
+    </parameters>
+  </node>
+  <node id="Read(2)">
+    <operator>Read</operator>
+    <sources/>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <useAdvancedOptions>false</useAdvancedOptions>
+      <file>D:\auto_dem\snaphu_export_out\srp_ifgs\UnwPhase_ifg_HH_28May2008_04May2008.snaphu.hdr</file>
+      <copyMetadata>true</copyMetadata>
+      <bandNames/>
+      <pixelRegion>0,0,5000,5000</pixelRegion>
+      <maskNames/>
+    </parameters>
+  </node>
+  <node id="PhaseToElevation">
+    <operator>PhaseToElevation</operator>
+    <sources>
+      <sourceProduct refid="SnaphuImport"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <demName>SRTM 3Sec</demName>
+      <demResamplingMethod>BILINEAR_INTERPOLATION</demResamplingMethod>
+      <externalDEMFile/>
+      <externalDEMNoDataValue>0.0</externalDEMNoDataValue>
+    </parameters>
+  </node>
+  <node id="Write(2)">
+    <operator>Write</operator>
+    <sources>
+      <sourceProduct refid="PhaseToElevation"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file>D:\auto_dem\dem.tif</file>
+      <formatName>GeoTIFF</formatName>
+    </parameters>
+  </node>
+  <node id="Write">
+    <operator>Write</operator>
+    <sources>
+      <sourceProduct refid="SnaphuImport"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file>D:\auto_dem\snaphu_export_out\srp_ifgs_unwrap.dim</file>
+      <formatName>BEAM-DIMAP</formatName>
+    </parameters>
+  </node>
+  <applicationData id="Presentation">
+    <Description/>
+    <node id="Read">
+            <displayPosition x="49.0" y="110.0"/>
+    </node>
+    <node id="SnaphuImport">
+      <displayPosition x="155.0" y="109.0"/>
+    </node>
+    <node id="Read(2)">
+      <displayPosition x="170.0" y="171.0"/>
+    </node>
+    <node id="PhaseToElevation">
+      <displayPosition x="146.0" y="36.0"/>
+    </node>
+    <node id="Write(2)">
+      <displayPosition x="290.0" y="35.0"/>
+    </node>
+    <node id="Write">
+            <displayPosition x="290.0" y="109.0"/>
+    </node>
+  </applicationData>
+</graph>
